@@ -5,7 +5,7 @@ async function startExpressServer() {
     const app = express()
     const port = process.env.PORT || 4001
     const corsOptions = {
-        origin: `http://localhost:${port}`,
+        origin: `http://localhost:${port}`
     }
 
     app.use(cors(corsOptions))

@@ -4,9 +4,11 @@
     "description": "",
     "main": "build/index.js",
     "scripts": {
-        "start": "nodemon --exec node --env-file=.env -r ts-node/register index.ts",
+        "start:dev": "nodemon --exec node --env-file=.env -r ts-node/register index.ts",
         "build": "tsc",
-        "serve": "node build/index.js"
+        "serve": "node build/index.js",
+        "eslint": "eslint --config config/eslint/eslint.config.mjs",
+        "prettier:write": "prettier --config config/prettier/prettier.config.mjs --ignore-path config/prettier/.prettierignore --write \"**/*.{ts,js,mjs,json}\""
     },
     "author": "rgdzv",
     "license": "ISC",
@@ -16,10 +18,15 @@
         "nodemon": "^3.1.7"
     },
     "devDependencies": {
+        "@eslint/js": "^9.16.0",
         "@types/cors": "^2.8.17",
         "@types/express": "^5.0.0",
         "@types/node": "^22.10.1",
+        "eslint": "^9.16.0",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "3.4.1",
         "ts-node": "^10.9.2",
-        "typescript": "^5.7.2"
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.16.0"
     }
 }

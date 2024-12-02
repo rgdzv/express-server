@@ -11,7 +11,11 @@
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "strictNullChecks": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "allowJs": true,
+        "paths": {
+            "*": ["./*"]
+        }
     },
     "exclude": ["node_modules"]
 }
