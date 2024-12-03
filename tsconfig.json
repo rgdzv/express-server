@@ -9,6 +9,7 @@
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
+        "useUnknownInCatchVariables": true,
         "strict": true,
         "strictNullChecks": true,
         "skipLibCheck": true,

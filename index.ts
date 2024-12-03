@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 
-async function startExpressServer() {
+function startExpressServer() {
     const app = express()
-    const port = process.env.PORT || 4001
+    const port = process.env.PORT ?? '4001'
     const corsOptions = {
         origin: `http://localhost:${port}`
     }
@@ -23,7 +23,7 @@ async function startExpressServer() {
         res.send('Success!')
     })
 
-    app.post('/login', (req, res) => {
+    app.post('/login', (req: Request, res: Response) => {
         console.log(req.body)
         res.json({ success: true })
     })

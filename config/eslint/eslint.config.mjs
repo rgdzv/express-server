@@ -11,9 +11,14 @@ export default tseslint.config(
         languageOptions: {
             parserOptions: {
                 projectService: true,
-                tsconfigRootDir: import.meta.dirname,
+                tsconfigRootDir: import.meta.dirname
             }
         },
-        ignores: ['**/node_modules/']
+        rules: {
+            'capitalized-comments': ['error']
+        }
+    },
+    {
+        ignores: ['node_modules/', 'config/', 'build/']
     }
 )
