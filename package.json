@@ -2,11 +2,11 @@
     "name": "y",
     "version": "1.0.0",
     "description": "",
-    "main": "build/index.js",
+    "main": "index.js",
     "scripts": {
-        "start:dev": "nodemon --exec node --env-file=.env -r ts-node/register index.ts",
+        "start:dev": "tsx --env-file=.env --watch src/index.ts",
         "build": "tsc",
-        "serve": "node build/index.js",
+        "serve": "node dist/index.js",
         "eslint:fix": "eslint --config config/eslint/eslint.config.mjs --fix",
         "prettier:write": "prettier --config config/prettier/prettier.config.mjs --ignore-path config/prettier/.prettierignore --write **/*.{ts,js,mjs,json}",
         "prepare": "husky"
@@ -21,8 +21,7 @@
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
-        "express": "^4.21.1",
-        "nodemon": "^3.1.7"
+        "express": "^4.21.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.16.0",
@@ -34,7 +33,7 @@
         "husky": "^9.1.7",
         "lint-staged": "^15.2.10",
         "prettier": "3.4.1",
-        "ts-node": "^10.9.2",
+        "tsx": "^4.19.2",
         "typescript": "^5.7.2",
         "typescript-eslint": "^8.16.0"
     }

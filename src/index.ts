@@ -4,6 +4,7 @@ import cors from 'cors'
 function startExpressServer() {
     const app = express()
     const port = process.env.PORT ?? '4001'
+
     const corsOptions = {
         origin: `http://localhost:${port}`
     }
