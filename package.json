@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start:dev": "tsx --env-file=.env --watch src/index.ts",
-        "build": "tsc",
+        "build": "tsc && tsc-alias -p tsconfig.json",
         "serve": "node dist/index.js",
         "eslint:fix": "eslint --config config/eslint/eslint.config.mjs --fix",
         "prettier:write": "prettier --config config/prettier/prettier.config.mjs --ignore-path config/prettier/.prettierignore --write **/*.{ts,js,mjs,json}",
@@ -33,6 +33,7 @@
         "husky": "^9.1.7",
         "lint-staged": "^15.2.10",
         "prettier": "3.4.1",
+        "tsc-alias": "^1.8.10",
         "tsx": "^4.19.2",
         "typescript": "^5.7.2",
         "typescript-eslint": "^8.16.0"
