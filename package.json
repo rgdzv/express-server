@@ -1,10 +1,10 @@
 {
-    "name": "y",
+    "name": "express-server",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start:dev": "tsx --env-file=.env --watch src/index.ts",
+        "start:dev": "tsx --env-file=.env --watch src/server.ts",
         "build": "tsc && tsc-alias -p tsconfig.json",
         "serve": "node dist/index.js",
         "eslint:fix": "eslint --config config/eslint/eslint.config.mjs --fix",
@@ -21,7 +21,9 @@
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
-        "express": "^4.21.1"
+        "express": "^4.21.1",
+        "sequelize": "^6.37.5",
+        "sqlite3": "^5.1.7"
     },
     "devDependencies": {
         "@eslint/js": "^9.16.0",

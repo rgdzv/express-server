@@ -13,6 +13,7 @@
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
         "useUnknownInCatchVariables": true,
+        "isolatedModules": true,
         "sourceMap": true,
         "outDir": "./dist",
         "baseUrl": ".",
