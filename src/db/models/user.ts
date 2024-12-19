@@ -7,8 +7,11 @@ import {
 } from 'sequelize'
 import { sequelize } from '../index'
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-    declare id: number
+export class User extends Model<
+    InferAttributes<User>,
+    InferCreationAttributes<User>
+> {
+    declare id?: string
     declare firstName: string
     declare lastName: string
     declare email: string
@@ -19,10 +22,6 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 
 User.init(
     {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         firstName: {
             type: DataTypes.STRING,
             allowNull: false
@@ -41,6 +40,7 @@ User.init(
     },
     {
         sequelize,
-        modelName: 'User'
+        modelName: 'User',
+        tableName: 'Users'
     }
 )
