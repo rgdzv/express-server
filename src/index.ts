@@ -1,9 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import { authRouter } from 'server'
 import { connectToDB } from 'db'
-import { checkSchema } from 'express-validator'
-import { signUpSchema } from 'server/controllers/utils/validation/signUpSchema'
-import { signUp } from 'server/controllers/auth/signUp'
 
 async function startExpressServer() {
     const app = express()
@@ -16,7 +14,7 @@ async function startExpressServer() {
     app.use(cors(corsOptions))
     app.use(express.json())
 
-    app.post('/signUp', checkSchema(signUpSchema), signUp)
+    app.use('/auth', authRouter)
 
     try {
         await connectToDB()

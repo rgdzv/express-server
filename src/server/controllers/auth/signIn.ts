@@ -3,42 +3,35 @@ import { User } from 'db/models/user'
 import { RequestBody } from '../types/signUpTypes'
 import bcrypt from 'bcryptjs'
 import { getErrorMessage } from '../utils/getErrorMessage/getErrorMessage'
-import { validationResult } from 'express-validator'
 import jwt from 'jsonwebtoken'
 
-export const signUp = async (
+export const signIn = async (
     req: Request<object, object, RequestBody>,
     res: Response
 ) => {
     try {
-        const errors = validationResult(req)
-
-        if (!errors.isEmpty()) {
-            res.status(400).json({
-                errors: errors.array()
-            })
-            return
-        }
-
-        const candidate = await User.findOne({
+        const user = await User.findOne({
             where: { email: req.body.email }
         })
 
-        if (candidate) {
+        if (!user) {
             res.status(500).json({
-                message: 'This email is already registered!'
+                message: 'There is no user with that email!'
             })
             return
         }
 
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const isPasswordValid = await bcrypt.compare(
+            req.body.password,
+            user.password
+        )
 
-        const user = await User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hashedPassword
-        })
+        if (!isPasswordValid) {
+            res.status(500).json({
+                message: 'Invalid email or password!'
+            })
+            return
+        }
 
         const token = jwt.sign(
             {
@@ -51,7 +44,9 @@ export const signUp = async (
             }
         )
 
-        res.status(200).json(token)
+        const result = { user, token }
+
+        res.status(200).json(result)
     } catch (err) {
         res.status(500).json(getErrorMessage(err))
     }
