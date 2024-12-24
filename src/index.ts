@@ -1,29 +1,34 @@
 import express from 'express'
 import cors from 'cors'
-import { authRouter } from 'server'
+import { router } from 'server'
 import { connectToDB } from 'db'
 
-async function startExpressServer() {
+function startExpressServer() {
     const app = express()
     const port = process.env.PORT ?? '4001'
+    const clientURL = process.env.CLIENT_URL ?? 'http://localhost'
+    const corsOrigin = `${clientURL}:${port}`
 
     const corsOptions = {
-        origin: `http://localhost:${port}`
+        origin: corsOrigin,
+        credentials: true
     }
 
     app.use(cors(corsOptions))
     app.use(express.json())
 
-    app.use('/auth', authRouter)
+    app.use('/api', router)
 
     try {
-        await connectToDB()
         app.listen(port, () => {
             console.log(`🚀 Server ready at http://localhost:${port}`)
         })
     } catch (error) {
-        console.log(error)
+        if (error instanceof Error) {
+            console.log(`Server launch failed due to this error: ${error}`)
+        }
     }
 }
 
-void startExpressServer()
+void connectToDB()
+startExpressServer()
