@@ -3,12 +3,22 @@ import { User } from 'db/models/user'
 import { RequestBody } from '../types/signUpTypes'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { validationResult } from 'express-validator'
 
 export const signIn = async (
     req: Request<object, object, RequestBody>,
     res: Response
 ) => {
     try {
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            res.status(400).json({
+                errors: errors.array()
+            })
+            return
+        }
+
         const user = await User.findOne({
             where: { email: req.body.email }
         })
