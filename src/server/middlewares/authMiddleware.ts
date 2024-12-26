@@ -6,34 +6,43 @@ export const authMiddleware = (
     res: Response,
     next: NextFunction
 ) => {
-    const authHeader = req.headers.authorization
+    try {
+        const authorizationHeader = req.headers.authorization
 
-    if (authHeader) {
-        const bearerToken = authHeader.split(' ')
+        if (!authorizationHeader) {
+            res.status(401).json({
+                message: 'You are not authorized!'
+            })
+            return
+        }
+
+        const bearerToken = authorizationHeader.split(' ')
 
         if (
-            bearerToken.length == 2 &&
-            bearerToken[0].toLowerCase() == 'bearer'
+            bearerToken.length !== 2 &&
+            bearerToken[0].toLowerCase() !== 'bearer'
         ) {
-            jwt.verify(
-                bearerToken[1],
-                process.env.JWT_SECRET ?? '',
-                function (error, decodedToken) {
-                    if (error) {
-                        res.status(401).json({
-                            message: 'Invalid authorization token'
-                        })
-                        return
-                    }
-
-                    req.decodedToken = decodedToken as string
-                    next()
-                }
-            )
-        } else {
-            next()
+            res.status(401).json({
+                message: 'You are not authorized!'
+            })
+            return
         }
-    } else {
+
+        const userData = jwt.verify(
+            bearerToken[1],
+            process.env.JWT_SECRET ?? ''
+        )
+
+        req.user = userData
+
         next()
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(401).json({
+                message: 'You are not authorized!'
+            })
+            return
+        }
+        res.status(500).json({ message: 'Unknown error!' })
     }
 }
