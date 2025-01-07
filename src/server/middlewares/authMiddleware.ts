@@ -19,7 +19,7 @@ export const authMiddleware = (
         const bearerToken = authorizationHeader.split(' ')
 
         if (
-            bearerToken.length !== 2 &&
+            bearerToken.length !== 2 ||
             bearerToken[0].toLowerCase() !== 'bearer'
         ) {
             res.status(401).json({

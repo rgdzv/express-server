@@ -2,8 +2,7 @@ import {
     DataTypes,
     InferAttributes,
     Model,
-    InferCreationAttributes,
-    CreationOptional
+    InferCreationAttributes
 } from 'sequelize'
 import { sequelize } from '../db'
 
@@ -16,8 +15,7 @@ export class User extends Model<
     declare lastName: string
     declare email: string
     declare password: string
-    declare createdAt: CreationOptional<Date>
-    declare updatedAt: CreationOptional<Date>
+    declare roles: string[]
 }
 
 User.init(
@@ -27,16 +25,23 @@ User.init(
             allowNull: false
         },
         lastName: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
         },
         password: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE
+        roles: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: ['user']
+        }
     },
     {
         sequelize,
