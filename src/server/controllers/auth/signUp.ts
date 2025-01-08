@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { User } from 'db/models/user'
+import { User } from 'db'
 import { RequestBody } from '../types/signUpTypes'
 import bcrypt from 'bcryptjs'
 import { validationResult } from 'express-validator'
@@ -37,7 +37,7 @@ export const signUp = async (
             lastName: req.body.lastName,
             email: req.body.email,
             password: hashedPassword,
-            roles: ['user']
+            roles: req.body.roles
         })
 
         const token = jwt.sign(

@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
+import { JwtPayloadWithUser } from 'declarations/express'
 
-export const authMiddleware = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
     try {
         const authorizationHeader = req.headers.authorization
 
@@ -31,16 +28,14 @@ export const authMiddleware = (
         const userData = jwt.verify(
             bearerToken[1],
             process.env.JWT_SECRET ?? ''
-        )
+        ) as JwtPayloadWithUser
 
         req.user = userData
 
         next()
     } catch (err) {
         if (err instanceof Error) {
-            res.status(401).json({
-                message: 'You are not authorized!'
-            })
+            res.status(500).json({ name: err.name, message: err.message })
             return
         }
         res.status(500).json({ message: 'Unknown error!' })

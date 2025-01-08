@@ -1,0 +1,34 @@
+import { User } from 'db'
+import { NextFunction, Request, Response } from 'express'
+
+export const verifyPermission = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const user = await User.findOne({
+            where: { email: req.user.email }
+        })
+
+        if (!user) {
+            res.status(403).json({ message: 'User must be provided!' })
+            return
+        }
+
+        if (!user.roles.includes('admin')) {
+            res.status(403).json({
+                message: 'Only admins can access this content!'
+            })
+            return
+        }
+
+        next()
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(500).json({ name: err.name, message: err.message })
+            return
+        }
+        res.status(500).json({ message: 'Unknown error!' })
+    }
+}
