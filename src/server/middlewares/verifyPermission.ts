@@ -18,7 +18,7 @@ export const verifyPermission = async (
 
         if (!user.roles.includes('admin')) {
             res.status(403).json({
-                message: 'Only admins can access this content!'
+                message: `You don't have access to this page!`
             })
             return
         }

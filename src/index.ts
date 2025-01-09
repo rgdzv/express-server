@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { router } from 'server'
 import { connectToDB } from 'db'
+import cookieParser from 'cookie-parser'
 
 function startExpressServer() {
     const app = express()
@@ -15,6 +16,7 @@ function startExpressServer() {
     }
 
     app.use(cors(corsOptions))
+    app.use(cookieParser())
     app.use(express.json())
 
     app.use('/api', router)
