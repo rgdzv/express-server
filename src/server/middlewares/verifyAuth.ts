@@ -17,7 +17,8 @@ export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
 
         if (
             bearerToken.length !== 2 ||
-            bearerToken[0].toLowerCase() !== 'bearer'
+            bearerToken[0].toLowerCase() !== 'bearer' ||
+            !bearerToken[1]
         ) {
             res.status(401).json({
                 message: 'You are not authorized!'
@@ -27,8 +28,15 @@ export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
 
         const userData = jwt.verify(
             bearerToken[1],
-            process.env.JWT_SECRET ?? ''
-        ) as JwtPayloadWithUser
+            process.env.JWT_ACCESS_SECRET ?? ''
+        ) as JwtPayloadWithUser | undefined
+
+        if (!userData) {
+            res.status(401).json({
+                message: 'You are not authorized!'
+            })
+            return
+        }
 
         req.user = userData
 

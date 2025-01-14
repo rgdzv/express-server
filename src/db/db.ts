@@ -11,7 +11,7 @@ export const connectToDB = async () => {
     try {
         await sequelize.sync({ force: true })
         console.log('All models are successfully syncronized')
-    } catch (e) {
-        console.log('Cannot connect to database: ', e)
+    } catch (err) {
+        throw new Error('Connecting to database failed.', { cause: err })
     }
 }
