@@ -9,4 +9,4 @@ export const router = express.Router()
 
 router.use('/auth', authRouter)
 router.use('/users', usersRouter)
-router.use('/admin', [verifyAuth, verifyPermission], getAdminInfo)
+router.get('/admin', [verifyAuth, verifyPermission], getAdminInfo)
