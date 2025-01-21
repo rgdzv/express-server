@@ -1,0 +1,21 @@
+{
+    // eslint extension settings for project
+    "eslint.options": {
+        "overrideConfigFile": "config/eslint/eslint.config.mjs"
+    },
+
+    // prettier extension settings for project
+    "prettier.requireConfig": true,
+    "prettier.useEditorConfig": false,
+    "prettier.configPath": "config/prettier/prettier.config.mjs",
+    "prettier.ignorePath": "config/prettier/.prettierignore",
+
+    // fix all problems on save for prettier
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+
+    // fix all problems on save for eslint
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    }
+}

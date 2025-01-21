@@ -12,7 +12,9 @@ export const verifyPermission = async (
         })
 
         if (!user) {
-            res.status(403).json({ message: 'User must be provided!' })
+            res.status(403).json({
+                message: `You don't have access to this page!`
+            })
             return
         }
 
