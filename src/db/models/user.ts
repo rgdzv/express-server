@@ -1,9 +1,5 @@
-import {
-    DataTypes,
-    InferAttributes,
-    Model,
-    InferCreationAttributes
-} from 'sequelize'
+import type { InferAttributes, InferCreationAttributes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../db'
 
 export class User extends Model<

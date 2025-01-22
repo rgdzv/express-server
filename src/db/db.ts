@@ -1,6 +1,7 @@
 import { config } from './config/config'
-import { Options, Sequelize } from 'sequelize'
-import { EnvType } from './types/envType'
+import type { Options } from 'sequelize'
+import { Sequelize } from 'sequelize'
+import type { EnvType } from './types/envType'
 
 const env = process.env.NODE_ENV ?? 'development'
 const configDB = config[env as EnvType]

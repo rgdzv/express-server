@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express'
-import { JwtPayload } from 'jsonwebtoken'
+import type { JwtPayload } from 'jsonwebtoken'
 
 export interface JwtPayloadWithUser extends JwtPayload {
     id: string

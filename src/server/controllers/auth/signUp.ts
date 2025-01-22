@@ -1,6 +1,6 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import { User } from 'db'
-import { RequestBody } from '../types/signUpTypes'
+import type { RequestBody } from '../types/signUpTypes'
 import bcrypt from 'bcryptjs'
 import { validationResult } from 'express-validator'
 import { generateTokens } from '../../services/token-service'
