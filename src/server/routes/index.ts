@@ -1,9 +1,9 @@
 import express from 'express'
-import { authRouter } from './auth'
-import { usersRouter } from './users'
 import { verifyPermission } from '../middlewares/verifyPermission'
 import { verifyAuth } from '../middlewares/verifyAuth'
 import { getAdminInfo } from '../controllers/users/getAdminInfo'
+import { usersRouter } from './users'
+import { authRouter } from './auth'
 
 export const router = express.Router()
 

@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import { router } from 'server'
-import { connectToDB } from 'db'
 import cookieParser from 'cookie-parser'
+import { router } from 'server'
+import { connectToDB } from 'database'
 
 function startExpressServer() {
     const app = express()

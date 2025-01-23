@@ -1,9 +1,9 @@
-import type { Request, Response } from 'express'
-import { User } from 'db'
-import type { RequestBody } from '../types/signUpTypes'
 import bcrypt from 'bcryptjs'
 import { validationResult } from 'express-validator'
+import { User } from 'database'
 import { generateTokens } from '../../services/token-service'
+import type { RequestBody } from '../types/signUpTypes'
+import type { Request, Response } from 'express'
 
 export const signIn = async (
     req: Request<object, object, RequestBody>,

@@ -1,6 +1,6 @@
+import { Sequelize } from 'sequelize'
 import { config } from './config/config'
 import type { Options } from 'sequelize'
-import { Sequelize } from 'sequelize'
 import type { EnvType } from './types/envType'
 
 const env = process.env.NODE_ENV ?? 'development'

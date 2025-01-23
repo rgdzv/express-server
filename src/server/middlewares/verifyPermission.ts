@@ -1,4 +1,4 @@
-import { User } from 'db'
+import { User } from 'database'
 import type { NextFunction, Request, Response } from 'express'
 
 export const verifyPermission = async (
