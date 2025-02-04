@@ -15,10 +15,9 @@ export default tseslint.config(
                 tsconfigRootDir: import.meta.dirname
             }
         },
-        extends: [
-            importPlugin.flatConfigs.recommended,
-            importPlugin.flatConfigs.typescript
-        ],
+        plugins: {
+            import: importPlugin
+        },
         settings: {
             'import/resolver': {
                 typescript: {}
